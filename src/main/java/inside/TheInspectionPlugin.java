@@ -95,7 +95,7 @@ public class TheInspectionPlugin extends Plugin{
                 return;
             }
 
-            if(packet.versionType == null || ((packet.version == -1 || !packet.versionType.equals(Version.type)) && Version.build != -1 && !netServer.admins.allowsCustomClients())){
+            if(packet.versionType == null || (packet.version == -1 || !packet.versionType.equals(Version.type)) && Version.build != -1 && !netServer.admins.allowsCustomClients()){
                 con.kick(!Version.type.equals(packet.versionType) ? KickReason.typeMismatch : KickReason.customClient);
                 return;
             }
@@ -205,7 +205,7 @@ public class TheInspectionPlugin extends Plugin{
                 String color = str.substring(1, i);
 
                 if(Colors.get(color.toUpperCase()) != null || Colors.get(color.toLowerCase()) != null){
-                    Color result = (Colors.get(color.toLowerCase()) == null ? Colors.get(color.toUpperCase()) : Colors.get(color.toLowerCase()));
+                    Color result = Colors.get(color.toLowerCase()) == null ? Colors.get(color.toUpperCase()) : Colors.get(color.toLowerCase());
                     if(result.a <= 0.8f){
                         return str.substring(i + 1);
                     }
