@@ -1,7 +1,7 @@
 {
-  "name": "",
-  "author": "",
-  "main": "",
-  "description": "",
-  "version": ""
+  "name": "TheInspectionPlugin",
+  "author": "Mindustry Inside",
+  "main": "mindustry.core.TheInspectionPlugin",
+  "description": "Extension for hub plugin. Allow to connect players with mods",
+  "version": "0.1"
 }
