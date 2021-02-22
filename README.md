@@ -1,5 +1,5 @@
-# Plugin name
-
+# TheInspection
+Extension for hub plugins, allowing players to connect to a server with mods
 
 ## Building a Jar
 
