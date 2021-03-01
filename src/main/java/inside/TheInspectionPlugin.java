@@ -21,12 +21,15 @@ import static mindustry.Vars.*;
 import static mindustry.net.Packets.*;
 
 public class TheInspectionPlugin extends Plugin{
-    private final ObjectMap<Class<?>, Cons2<NetConnection, Object>> serverListeners = Reflect.get(Net.class, net, "serverListeners");
-    private final ReusableByteOutStream writeBuffer = Reflect.get(NetServer.class, netServer, "writeBuffer");
-    private final Writes outputBuffer = Reflect.get(NetServer.class, netServer, "outputBuffer");
+    private ObjectMap<Class<?>, Cons2<NetConnection, Object>> serverListeners;
+    private ReusableByteOutStream writeBuffer;
+    private Writes outputBuffer;
 
     @Override
     public void init(){
+        serverListeners = Reflect.get(Net.class, net, "serverListeners");
+        writeBuffer = Reflect.get(NetServer.class, netServer, "writeBuffer");;
+        outputBuffer = Reflect.get(NetServer.class, netServer, "outputBuffer");
 
         handleServer(ConnectPacket.class, (con, packet) -> {
             if(con.address.startsWith("steam:")){
