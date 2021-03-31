@@ -32,9 +32,13 @@ public class TheInspectionPlugin extends Plugin{
         outputBuffer = Reflect.get(NetServer.class, netServer, "outputBuffer");
 
         handleServer(ConnectPacket.class, (con, packet) -> {
+            if(con.kicked) return;
+
             if(con.address.startsWith("steam:")){
                 packet.uuid = con.address.substring("steam:".length());
             }
+
+            con.connectTime = Time.millis();
 
             String uuid = packet.uuid;
             byte[] buuid = Base64Coder.decode(uuid);
@@ -125,7 +129,7 @@ public class TheInspectionPlugin extends Plugin{
             }
 
             if(packet.locale == null){
-                packet.locale = "en_US";
+                packet.locale = "en";
             }
 
             String ip = con.address;
