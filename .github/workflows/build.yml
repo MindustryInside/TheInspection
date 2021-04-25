@@ -1,10 +1,6 @@
 name: Java CI
 
-on:
-  push:
-    tags:
-      - '*'
-  workflow_dispatch:
+on: [pull_request, workflow_dispatch]
 
 jobs:
   buildJar:
@@ -16,13 +12,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 14
-      - name: Build plugin
-        run: |
-          chmod +x gradlew
-          ./gradlew jar
-      - name: Upload jar
-        uses: svenstaro/upload-release-action@v2
+      - name: Build plugin jar
+        run: ./gradlew jar
+      - name: Upload built jar file
+        uses: actions/upload-artifact@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/libs/TheInspection.jar
-          tag: ${{ github.ref }}
+          name: ${{ github.event.repository.name }}
+          path: build/libs/${{ github.event.repository.name }}.jar
