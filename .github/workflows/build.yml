@@ -13,7 +13,9 @@ jobs:
         with:
           java-version: 14
       - name: Build plugin jar
-        run: ./gradlew jar
+        run: |
+          chmod +x gradlew
+          ./gradlew jar
       - name: Upload built jar file
         uses: actions/upload-artifact@v2
         with:
