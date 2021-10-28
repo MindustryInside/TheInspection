@@ -38,6 +38,8 @@ public class TheInspectionPlugin extends Plugin{
                 packet.uuid = con.address.substring("steam:".length());
             }
 
+            Events.fire(new EventType.ConnectPacketEvent(con, packet));
+
             con.connectTime = Time.millis();
 
             String uuid = packet.uuid;
@@ -107,9 +109,7 @@ public class TheInspectionPlugin extends Plugin{
                 return;
             }
 
-            boolean preventDuplicates = headless && netServer.admins.isStrict();
-
-            if(preventDuplicates){
+            if(headless && netServer.admins.isStrict()){
                 if(Groups.player.contains(p -> p.name.trim().equalsIgnoreCase(packet.name.trim()))){
                     con.kick(KickReason.nameInUse);
                     return;
