@@ -3,5 +3,5 @@
   "author": "Mindustry Inside",
   "main": "inside.TheInspectionPlugin",
   "description": "Extension for hub plugin. Allow to connect players with mods",
-  "version": "0.1"
+  "version": "0.2"
 }
