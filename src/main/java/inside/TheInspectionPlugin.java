@@ -1,7 +1,6 @@
 package inside;
 
 import arc.Events;
-import arc.func.Cons2;
 import arc.graphics.*;
 import arc.struct.*;
 import arc.util.*;
@@ -21,17 +20,15 @@ import static mindustry.Vars.*;
 import static mindustry.net.Packets.*;
 
 public class TheInspectionPlugin extends Plugin{
-    private ObjectMap<Class<?>, Cons2<NetConnection, Object>> serverListeners;
     private ReusableByteOutStream writeBuffer;
     private Writes outputBuffer;
 
     @Override
     public void init(){
-        serverListeners = Reflect.get(Net.class, net, "serverListeners");
         writeBuffer = Reflect.get(NetServer.class, netServer, "writeBuffer");
         outputBuffer = Reflect.get(NetServer.class, netServer, "outputBuffer");
 
-        handleServer(ConnectPacket.class, (con, packet) -> {
+        net.handleServer(ConnectPacket.class, (con, packet) -> {
             if(con.kicked) return;
 
             if(con.address.startsWith("steam:")){
@@ -229,10 +226,5 @@ public class TheInspectionPlugin extends Plugin{
             }
         }
         return str;
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T> void handleServer(Class<T> type, Cons2<NetConnection, T> listener){
-        serverListeners.put(type, (Cons2<NetConnection, Object>)listener);
     }
 }
